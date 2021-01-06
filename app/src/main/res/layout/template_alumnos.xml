@@ -55,7 +55,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:fontFamily="@font/aref_ruqaa"
-                    android:text="numero de control"
+                    android:text="número de control"
                     android:textSize="10.5dp"
                     android:textStyle="bold"
                     android:typeface="normal" />

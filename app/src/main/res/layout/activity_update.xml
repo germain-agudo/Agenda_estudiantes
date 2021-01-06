@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
-                android:elevation="4dp"
+
                 android:backgroundTint="@color/design_default_color_background"
                 app:srcCompat="@drawable/contacto" />
 
