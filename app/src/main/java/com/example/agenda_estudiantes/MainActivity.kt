@@ -3,8 +3,12 @@ package com.example.agenda_estudiantes
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
+import android.view.Menu
 import android.view.View
-import android.widget.Toast
+
+
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.agenda_estudiantes.modelo.AdminDB
@@ -31,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        title = "Agenda ITVO"
 
        // startActivity(Intent(applicationContext, Listar::class.java))
 
@@ -72,5 +76,34 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(applicationContext, Create::class.java))
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+                menuInflater.inflate(R.menu.menu,menu)
 
+                val menuItem = menu!!.findItem(R.id.searchView)
+
+        val searchView = menuItem.actionView as SearchView
+
+        searchView.maxWidth =   Int.MAX_VALUE
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(filterString: String?): Boolean {
+               // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+                adaptador!!.filter.filter(filterString)
+                return true
+            }
+
+            override fun onQueryTextChange(filterString: String?): Boolean {
+                //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+                    adaptador!!.filter.filter(filterString)
+                return true
+            }
+
+
+        })
+
+
+        return true
+    }
 }

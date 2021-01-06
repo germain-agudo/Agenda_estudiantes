@@ -4,20 +4,19 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import com.example.agenda_estudiantes.modelo.AdminDB
-import kotlinx.android.synthetic.main.activity_create.*
+
 import kotlinx.android.synthetic.main.activity_update.*
-import kotlin.math.log
+
 
 class Update : AppCompatActivity() {
-    val carrera = arrayOf("--Seleccione carrera--","ING. INFORMATICA","ING. TIC´S","ING. FORESTAL", "ING. EN AGRONOMIA","LIC. EN BILOGIA")
 
+    val carrera = arrayOf("--Seleccione carrera--","ING. INFORMATICA","ING. TIC´S","ING. FORESTAL", "ING. EN AGRONOMIA","LIC. EN BILOGIA")
     val contactoDb = AdminDB()
     var id : Int = 0
     var nombre_carrera : String = ""
@@ -28,16 +27,22 @@ class Update : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
+        title = "Editar alumno"
         setContentView(R.layout.activity_update)
         val intent : Intent = intent
          id = intent.getIntExtra("id",0)
-        findStudent()
 
+        findStudent()
         crearSpinner()
-        title = "Editar alumno"
+
+
     }
 
-    fun btnUpdatePressed(view: View) {
+
+    fun btnUpdatePressed() {
         var imagen: String = ""
 
         if (update_nombre_carrera.equals(carrera.get(1))) {
@@ -80,10 +85,10 @@ class Update : AppCompatActivity() {
                         0
                         ,
                         etUpdateControlNumber.text.toString().trim(),
-                        etUpdateName.text.toString().trim(),
+                        etUpdateName.text.toString().toUpperCase().trim(),
                         update_nombre_carrera,
                         Integer.parseInt(etUpdateSemester.text.toString().trim()),
-                        etUpdateGroup.text.toString().trim(),
+                        etUpdateGroup.text.toString().toUpperCase().trim(),
                         imagen
                     )
                     contactoDb.modiifyUser(id, updateStudent)
@@ -106,56 +111,50 @@ class Update : AppCompatActivity() {
     }
 
 
-    fun btnCancelPressed(view: View) {
-        startActivity(Intent(applicationContext,MainActivity::class.java))
+    fun btnNewPressed() {
+        startActivity(Intent(applicationContext,Create::class.java))
     }
-    fun btnDeletePressed(view: View) {
+    fun btnDeletePressed() {
         contactoDb.deleteStudent(id)
         startActivity(Intent(applicationContext,MainActivity::class.java))
     }
 
 
 
+
     fun findStudent(){
-        val datos = contactoDb.getStudent(id)
-        etUpdateControlNumber.setText(datos!!.get(0).numero_control.toString())
-        etUpdateName.setText(datos!!.get(0).nombre.toString())
-        //etUpdateCareer.setText(datos!!.get(0).carrera.toString())
-        etUpdateSemester.setText(datos!!.get(0).semestre.toString())
-        etUpdateGroup.setText(datos!!.get(0).grupo.toString())
 
-        var url = Uri.parse(datos!!.get(0).imagen)
-        updateImageView.setImageURI(url)
+            val datos = contactoDb.getStudent(id)
+            etUpdateControlNumber.setText(datos!!.get(0).numero_control.toString())
+            etUpdateName.setText(datos!!.get(0).nombre.toString())
+            //etUpdateCareer.setText(datos!!.get(0).carrera.toString())
+            etUpdateSemester.setText(datos!!.get(0).semestre.toString())
+            etUpdateGroup.setText(datos!!.get(0).grupo.toString())
 
-        nombre_carrera= datos!!.get(0).carrera.toString()
+            var url = Uri.parse(datos!!.get(0).imagen)
+            updateImageView.setImageURI(url)
+
+            nombre_carrera = datos!!.get(0).carrera.toString()
 
 
     }
 
     fun crearSpinner(){
-
-
         val spinner :Spinner
         spinner= findViewById(R.id.spinnerUpdate)
-
         val adapter = ArrayAdapter(
             applicationContext,
             android.R.layout.simple_spinner_item,
             carrera)
-
         spinner.adapter=adapter
         spinner.setSelection(carrera.indexOf(nombre_carrera))
         spinner.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>) {
                 //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-
             }
-
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-
                 //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                // var res =parent.getItemAtPosition(position).toString()
-
                 if (position>0){
                     update_nombre_carrera = parent.getItemAtPosition(position).toString()
                     spinner_verificacion = true
@@ -169,11 +168,41 @@ class Update : AppCompatActivity() {
 
     fun  existencia() {
         numero_control_repetido=0
-        numero_control_repetido = contactoDb.getnc_id(etUpdateControlNumber.text.toString(),id)
+        numero_control_repetido = contactoDb.getnc_id(etUpdateControlNumber.text.toString().trim(),id)
        // Log.d("es este", numero_control_repetido.toString())
 
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_editar_eliminar,menu)
+
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+       return  when(item.itemId){
+
+           R.id.opcion_editar_alumno->{
+               //Log.e("TAG","opcion editar")
+               btnUpdatePressed()
+               true
+           }
+
+           R.id.opcion_eliminar_alumno->{
+              // Log.e("TAG","opcion eliminar")
+               btnDeletePressed()
+               true
+           }
+
+           R.id.opcion_agregar_alumno->{
+               //Log.e("TAG","opcion agregar")
+               btnNewPressed()
+               true
+           }
+           else->super.onOptionsItemSelected(item)
+       }
+    }
 
 
 }

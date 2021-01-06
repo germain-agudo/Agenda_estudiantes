@@ -1,24 +1,26 @@
 <resources>
     <string name="app_name">Agenda_estudiantes</string>
-    <string name="numero_control">Numero de control</string>
+    <string name="numero_control">Número de control</string>
     <string name="nombre">Nombre</string>
-    
-    
-    <string name="createViewTitle">Crear</string>
-
+    <string name="createViewTitle">Nuevo registro</string>
     <string name="id">id</string>
-
     <string name="addNamePlaceholder">Nombre</string>
     <string name="addControlNumberPlaceholder">Numero de control</string>
     <string name="addCareerPlaceholder">Carrera</string>
     <string name="addSemesterPlaceholder">Semestre</string>
     <string name="addGroupPlaceholder">Grupo</string>
-
     <string name="addButtonText">Crear</string>
     <string name="cancelButtonText">Cancelar</string>
     <string name="deleteButtonText">Eliminar alumno</string>
-
     <string name="updateButtonText">Modificar</string>
+    <string name="search">Buscar no. Control</string>
 
-
+    <string name="lista_alumnos">Lista de Alumnos</string>
 </resources>
+
+
+
+
+
+
+

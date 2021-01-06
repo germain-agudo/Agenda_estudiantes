@@ -5,15 +5,16 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.EditText
+
 import android.widget.Toast
-import androidx.annotation.IntegerRes
-import com.example.agenda_estudiantes.config.AppAgenda
+
 import com.example.agenda_estudiantes.modelo.AdminDB
 import kotlinx.android.synthetic.main.activity_create.*
+
 
 class Create : AppCompatActivity() {
     val contactoAdmin = AdminDB()
@@ -27,6 +28,9 @@ class Create : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create)
         title = "Agregar alumno"
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+
         crearSpinner()
     }
 
@@ -74,11 +78,11 @@ class Create : AppCompatActivity() {
                    val alumno = Alumno(
                        0,
                        etAddControlNumber.text.toString().trim(),
-                       etAddName.text.toString().trim()
+                       etAddName.text.toString().toUpperCase().trim()
                        ,
                        nombre_carrera,
                        Integer.parseInt(etAddSemester.text.toString().trim()),
-                       etAddGroup.text.toString().trim(),
+                       etAddGroup.text.toString().toUpperCase().trim(),
                        imagen
                    )
                    contactoAdmin.addStudent(alumno)
@@ -113,12 +117,16 @@ class Create : AppCompatActivity() {
     fun crearSpinner(){
 
         val adapter = ArrayAdapter(
-            applicationContext,
+            this,
             android.R.layout.simple_spinner_item,
             carrera)
 
+
+
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+
         spinner.adapter=adapter
+
         spinner.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 //tvTotal.text="Descuento de  : ${parent.getItemAtPosition(position).toString()}"
@@ -140,10 +148,20 @@ class Create : AppCompatActivity() {
 
 fun  existencia() {
     numero_control_repetido=0
-    numero_control_repetido = contactoAdmin.getnc(etAddControlNumber.text.toString())
-
+    numero_control_repetido = contactoAdmin.getnc(etAddControlNumber.text.toString().trim())
+    Log.d("TAG","El no. control se repite "+ numero_control_repetido.toString()+" Veces")
 }
 
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            android.R.id.home->{
+                onBackPressed()
+                true
+            }
+            else->super.onOptionsItemSelected(item)
+        }
+    }
 
 
 }

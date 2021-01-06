@@ -17,16 +17,13 @@ import com.example.agenda_estudiantes.Alumno
  *
  */
 class AppAgenda:Application(){
-
     companion object{
         lateinit var CONTEXT: Context
         lateinit var DB : InitDb
         val DB_NAME="agendaDB"
         val VERSION =1
         val TB_Alumnos ="tbAlumnos"
-
     }
-
     override fun onCreate() {
         super.onCreate()
         CONTEXT = applicationContext
@@ -63,7 +60,6 @@ class Contract{
  */
 
 class InitDb: SQLiteOpenHelper(AppAgenda.CONTEXT,AppAgenda.DB_NAME, null,AppAgenda.VERSION){
-
     val queryTablaAlumnos ="CREATE TABLE ${AppAgenda.TB_Alumnos}(" +
             "${Contract.alumno.ID} INTEGER PRIMARY KEY AUTOINCREMENT" +
             ",${Contract.alumno.NUMERO_CONTROL} TEXT NOT NULL" +
@@ -79,7 +75,7 @@ class InitDb: SQLiteOpenHelper(AppAgenda.CONTEXT,AppAgenda.DB_NAME, null,AppAgen
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 

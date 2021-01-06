@@ -22,10 +22,12 @@
             android:layout_margin="5dp"
             android:fontFamily="cursive"
             android:gravity="center"
-            android:text="Lista de Alumnos"
+            android:text="@string/lista_alumnos"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:typeface="normal" />
+            android:typeface="normal"
+            />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lista_alumnos"
@@ -33,7 +35,9 @@
             android:layout_height="449dp"
 
 
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+
+            >
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -46,10 +50,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-
         android:layout_margin="25dp"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:clickable="true"
         android:onClick="btnAddStudent"
+        android:tint="@color/colorPrimaryLight"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:fabCustomSize="55dp"
+        app:maxImageSize="60dp"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

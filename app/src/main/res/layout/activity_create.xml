@@ -14,8 +14,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:clickable="true"
+
+
+
         app:srcCompat="@drawable/okay"
         android:onClick="btnCreatePressed"
+
         />
 
     <LinearLayout
@@ -56,6 +60,7 @@
                 android:textColorHint="@color/colorPrimary"
                 android:textSize="12sp"
                 android:fontFamily="@font/aref_ruqaa"
+                android:textColor="@color/colorPrimary"
                 />
         </LinearLayout>
 
@@ -83,7 +88,9 @@
                 android:hint="@string/addNamePlaceholder"
                 android:inputType="text"
                 android:textColorHint="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textColor="@color/colorPrimary"
+                />
         </LinearLayout>
 
 
@@ -103,14 +110,16 @@
 
             <Spinner
 
-                android:fontFamily="@font/aref_ruqaa"
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="12sp"
-                android:textColorHint="@color/colorPrimary"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+
+                android:fontFamily="@font/aref_ruqaa"
+                android:textColor="@color/colorPrimary"
+
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -137,7 +146,9 @@
                 android:hint="@string/addSemesterPlaceholder"
                 android:inputType="number"
                 android:textColorHint="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textColor="@color/colorPrimary"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -164,7 +175,9 @@
                 android:hint="@string/addGroupPlaceholder"
                 android:inputType="text"
                 android:textColorHint="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textColor="@color/colorPrimary"
+                />
         </LinearLayout>
 
 
