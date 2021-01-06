@@ -77,7 +77,7 @@ class Update : AppCompatActivity() {
                 existencia()
 
                 if(numero_control_repetido!=0){
-                    Toast.makeText(applicationContext, "El numero de control: "+etUpdateControlNumber.text.toString().trim()+" ya existe", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "El número de control: "+etUpdateControlNumber.text.toString().trim()+" ya existe", Toast.LENGTH_SHORT).show()
                 }else {
 
 
